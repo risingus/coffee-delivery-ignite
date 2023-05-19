@@ -1,0 +1,22 @@
+
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  width: 100%;
+  margin: 0 10rem;
+  z-index: 3;
+  
+  
+
+  
+
+}
+
+.heroBackground {
+  position: absolute;
+  width: 100%;
+}
