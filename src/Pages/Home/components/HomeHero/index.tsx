@@ -1,16 +1,14 @@
-import { Coffee, MapPin, Package, Timer } from '@phosphor-icons/react';
-import heroBackground from '../../../../assets/images/heroBackground.svg'
+import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react';
 import heroImg from '../../../../assets/images/heroImg.svg'
 import styles from './styles.module.scss';
 
 export function HomeHero() {
   return (
-    <>
       <div className={styles.hero}>
         <div className={styles.heroInfo}>
           <div className={styles.heroText}>
             <h1>
-              Encontre o café perfeito para qualquer hora do dia
+            Encontre o café perfeito <br /> para qualquer hora do dia
             </h1>
 
             <p>
@@ -20,14 +18,14 @@ export function HomeHero() {
 
             <div className={styles.heroItems}>
               <div className={styles.heroItem}>
-                <div>
-                  <MapPin size={16} weight="fill" />
+              <div className={styles.heroShopping}>
+                <ShoppingCart size={16} weight="fill" />
                 </div>
                 <p>Compra simples e segura</p>
               </div>
 
               <div className={styles.heroItem}>
-                <div>
+              <div className={styles.heroDelivery}>
                   <Package size={16} weight="fill" />
                 </div>
 
@@ -35,7 +33,7 @@ export function HomeHero() {
               </div>
 
               <div className={styles.heroItem}>
-                <div>
+              <div className={styles.heroTime}>
                   <Timer size={16} weight="fill" />
                 </div>
                 <p>Entrega rápida e rastreada</p>
@@ -43,19 +41,17 @@ export function HomeHero() {
 
 
               <div className={styles.heroItem}>
-                <div>
+              <div className={styles.heroCoffee}>
                   <Coffee size={16} weight="fill" />
                 </div>
-                <p>O café chega fresquinho até você</p>
-              </div>
+              <p>O café chega fresquinho até você</p>
             </div>
           </div>
         </div>
-
         <img src={heroImg} className={styles.heroImg} />
       </div>
-      <img src={heroBackground} className={styles.heroBackground} />
-    </>
 
+      <div className={styles.heroBackground} />
+    </div >
   )
 }
