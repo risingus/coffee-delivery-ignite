@@ -1,6 +1,8 @@
 
 import { Minus, Plus, ShoppingCart } from '@phosphor-icons/react';
 import styles from './styles.module.scss';
+import { formatCurrency } from '../../services/utils';
+import { CoffeeCount } from '../CoffeeCount';
 
 interface CoffeeTypes {
   id: number
@@ -55,22 +57,10 @@ export function Card({
         </div>
 
         <div className={styles.footer}>
-          <p>R$ <strong>{new Intl.NumberFormat('pt-br', {
-            minimumFractionDigits: 2,
-          }).format(price)}</strong></p>
+          <p>R$ <strong>{formatCurrency({ currency: false, value: price })}</strong></p>
 
           <div className={styles.actions}>
-            <div className={styles.actionsInput}>
-              <button type='button' className={styles.actionsInputButton} onClick={() => decreaseCounter(title)}>
-                <Minus size={14} />
-              </button>
-              <input type="number" disabled value={count} max={10} min={0} />
-
-              <button type='button' className={styles.actionsInputButton} onClick={() => increaseCounter(title)}>
-                <Plus size={14} />
-              </button>
-            </div>
-
+            <CoffeeCount count={count} increaseCounter={() => increaseCounter(title)} decreaseCounter={() => decreaseCounter(title)} />
             <button type='button' >
               <ShoppingCart size={22} weight="fill" />
             </button>

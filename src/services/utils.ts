@@ -61,5 +61,22 @@ function convertStateToCode(name: string) {
 			return ''
 	}
 }
+interface FormatCurrencyProps {
+	value: number
+	currency: boolean
+}
 
-export { convertStateToCode }
+const formatCurrency = ({ value, currency }: FormatCurrencyProps) => {
+	if (typeof value !== 'number' && !currency) return '0'
+	if (typeof value !== 'number' && currency) return 'R$ 0,00'
+
+	const formatedCurrency = new Intl.NumberFormat('pt-br', {
+		...(currency && { style: 'currency' }),
+		...(currency && { currency: 'BRL' }),
+		maximumFractionDigits: 2,
+	}).format(value)
+
+	return formatedCurrency
+}
+
+export { convertStateToCode, formatCurrency }

@@ -24,6 +24,10 @@ export function Header() {
     navigate('/');
   }
 
+  function goToCart() {
+    navigate('checkout')
+  }
+
   async function getLocation({ coords }: CurrentPositionProps) {
     try {
       const { latitude, longitude } = coords;
@@ -72,7 +76,7 @@ export function Header() {
           </span>
         </button>
 
-        <button type='button' className={styles.buttonCart} >
+        <button type='button' className={styles.buttonCart} onClick={goToCart} >
           <ShoppingCart size={22} weight="fill" className={styles.buttonCartIcon} />
           <div className={styles.buttonCartCount}>
             3
