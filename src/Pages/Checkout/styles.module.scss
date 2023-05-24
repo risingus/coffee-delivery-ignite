@@ -1,0 +1,228 @@
+.checkoutContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0 10rem;
+
+  @media (width < 550px) {
+      margin: 0 5rem;
+    }
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.94rem;
+
+    >h3 {
+      font-family: Baloo2;
+      font-weight: 700;
+      line-height: 130%;
+      font-size: 1.125rem;
+      color: var(--base-subtitle);
+    }
+
+    .addressContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      background-color: var(--base-card);
+      border-radius: 6px;
+      padding: 2.5rem;
+      width: 40rem;
+
+      .addressFormHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.5rem;
+        width: 40rem;
+
+        >svg {
+          color: var(--yellow-dark);
+        }
+
+        .addressFormHeaderTextContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.125rem;
+
+          >p,
+          span {
+            font-family: Roboto;
+            font-weight: 400;
+            line-height: 130%;
+          }
+
+          >p {
+            font-size: 1rem;
+            color: var(--base-subtitle);
+          }
+
+          >span {
+            color: var(--base-text);
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+
+    .paymentTypeContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2.5rem;
+      background-color: var(--base-card);
+      border-radius: 4px;
+
+
+      .paymentTypeHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: .5rem;
+
+        >svg {
+          color: var(--purple);
+        }
+
+        .paymentTypeHeaderTextContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.125rem;
+
+          >p,
+          span {
+            font-family: Roboto;
+            font-weight: 400;
+            line-height: 130%;
+          }
+
+          >p {
+            font-size: 1rem;
+            color: var(--base-subtitle);
+          }
+
+          >span {
+            font-size: 0.875rem;
+            color: var(--base-text);
+          }
+        }
+      }
+
+      .paymentTypeButtonsContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+      }
+
+    }
+
+    .totalContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 2.5rem;
+      width: 28rem;
+      background-color: var(--base-card);
+      border-radius: 6px 44px;
+
+      .coffeesList {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        >div {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+
+          >hr {
+            width: 100%;
+            border: 1px solid var(--base-button);
+          }
+        }
+      }
+
+      .paymentTotalContainer {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+
+        >div {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+
+          >p,
+          span {
+            font-family: Roboto;
+            font-weight: 400;
+            line-height: 130%;
+            color: var(--base-text);
+          }
+
+          >p {
+            font-size: 0.875rem;
+          }
+
+          >span {
+            font-size: 1rem;
+          }
+
+          >strong {
+            font-family: Roboto;
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 130%;
+            color: var(--base-subtitle);
+          }
+        }
+      }
+
+      >button {
+        border: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0.75rem 0.5rem;
+        width: 23rem;
+        height: 2.875rem;
+        border-radius: 6px;
+        background-color: var(--yellow);
+        color: var(--white);
+        font-family: Roboto;
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 160%;
+        text-transform: uppercase;
+        font-stretch: 100;
+
+        &:hover {
+          background-color: var(--yellow-dark);
+        }
+
+      }
+    }
+  }
+}

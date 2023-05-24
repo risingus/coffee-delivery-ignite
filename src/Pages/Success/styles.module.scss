@@ -1,0 +1,148 @@
+.success {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10rem;
+
+  @media (width < 550px) {
+    margin: 0 5rem;
+  }
+
+  .messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 2.5rem;
+
+    .infoHeader {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      h1 {
+        font-family: Baloo2;
+        font-weight: 800;
+        font-size: 2rem;
+        line-height: 130%;
+        color: var(--yellow-dark);
+      }
+
+      p {
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 130%;
+        font-stretch: 100;
+        color: var(--base-subtitle);
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 6.375rem;
+
+      .infoContainer {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2.5rem;
+        gap: 2rem;
+        border-radius: 6px 36px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: transparent;
+        background-color: var(--background);
+
+        &::before {
+          content: '';
+          position: absolute;
+          padding: 2px;
+          background: linear-gradient(102.89deg, var(--yellow), var(--purple));
+          top: -2px;
+          left: -2px;
+          width: 100%;
+          height: 100%;
+          border-radius: 6px 36px;
+          z-index: -1;
+        }
+
+        :first-child {
+          .infoIcon {
+            background-color: var(--purple);
+          }
+        }
+
+        :nth-child(2) {
+          .infoIcon {
+            background-color: var(--yellow);
+          }
+        }
+
+        :nth-child(3) {
+          .infoIcon {
+            background-color: var(--yellow-dark);
+          }
+        }
+
+        .info {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 0.75rem;
+
+          .infoIcon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 10000px;
+
+            >svg {
+              color: var(--white);
+            }
+          }
+
+          .infoText {
+            display: flex;
+            flex-direction: column;
+            font-family: Roboto;
+            font-size: 1rem;
+            line-height: 130%;
+            color: var(--base-text);
+
+            p {
+              font-weight: 400;
+            }
+
+            strong {
+              font-weight: 700;
+            }
+
+            .paymentType {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+
+      >img {
+        width: clamp(20rem, 30vw, 30.75rem);
+      }
+    }
+  }
+}

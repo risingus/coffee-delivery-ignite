@@ -1,0 +1,78 @@
+
+ 
+ @font-face {
+  font-family: 'Baloo2';
+  src: url( './assets/fonts/Baloo2-Bold.ttf');
+  font-weight: 700;
+ }
+
+ @font-face {
+  font-family: 'Baloo2';
+  src: url( './assets/fonts/Baloo2-ExtraBold.ttf');
+  font-weight: 800;
+ }
+
+ @font-face {
+  font-family: 'Roboto';
+  src: url( './assets/fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+ }
+
+ @font-face {
+   font-family: 'Roboto';
+   src: url('./assets/fonts/Roboto-Italic.ttf');
+   font-weight: 400;
+   font-style: italic;
+ }
+ @font-face {
+  font-family: 'Roboto';
+  src: url( './assets/fonts/Roboto-Bold.ttf');
+  font-weight: 700;
+ }
+
+
+:root {
+  font-family: Roboto, sans-serif;
+  line-height: 130%;
+  font-weight: 400;
+  font-size: 14px;
+
+  --yellow: #DBAC2C;
+  --yellow-dark: #C47F17;
+  --yellow-light: #F1E9C9;
+  --purple: #8047F8;
+  --purple-dark: #4B2995;
+  --purple-light: #EBE5F9;
+  --base-title: #272221;
+  --base-subtitle: #403937;
+  --base-text: #574F4D;
+  --base-label: #8D8686;
+  --base-hover: #D7D5D5;
+  --base-button: #E6E5E5;
+  --base-input: #EDEDED;
+  --base-card: #F3F2F2;
+  --background: #FAFAFA;
+  --white: #FFFFFF; 
+
+
+  color-scheme: light;
+  color: var(--base-text);
+  background-color: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+ }
+
+ body {
+  position: relative;
+ }
+ 
