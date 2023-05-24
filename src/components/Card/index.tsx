@@ -1,35 +1,41 @@
 
-import { Minus, Plus, ShoppingCart } from '@phosphor-icons/react';
+import { ShoppingCart } from '@phosphor-icons/react';
 import styles from './styles.module.scss';
 import { formatCurrency } from '../../services/utils';
 import { CoffeeCount } from '../CoffeeCount';
-
-interface CoffeeTypes {
-  id: number
-  description: string
-}
-
-interface CardsProps {
-  title: string
-  description: string
-  img: string
-  price: number
-  count: number
-  types: CoffeeTypes[]
-  increaseCounter: (id: string) => void
-  decreaseCounter: (id: string) => void
-}
+import { useState } from 'react';
+import { CoffeeProps, useCoffeeDelivery } from '../../contexts/CoffeeDelivery';
 
 export function Card({
+  id,
   title,
   description,
   img,
   price,
-  count,
   types,
-  increaseCounter,
-  decreaseCounter
-}: CardsProps) {
+}: CoffeeProps) {
+  const [coffeeCount, setCoffeeCount] = useState(0 as number);
+  const { addCoffeeToCart } = useCoffeeDelivery();
+
+  function increaseCounter() {
+    setCoffeeCount((state) => {
+      if (state === 10) return state
+      return state + 1
+    })
+  }
+
+  function decreaseCounter() {
+    setCoffeeCount((state) => {
+      if (state === 0) return state
+      return state - 1
+    })
+  }
+
+  function handleAdd() {
+    addCoffeeToCart({ count: coffeeCount, id })
+    setCoffeeCount(0)
+  }
+
   return (
     <div className={styles.card}>
       <img src={img} alt="" />
@@ -60,8 +66,8 @@ export function Card({
           <p>R$ <strong>{formatCurrency({ currency: false, value: price })}</strong></p>
 
           <div className={styles.actions}>
-            <CoffeeCount count={count} increaseCounter={() => increaseCounter(title)} decreaseCounter={() => decreaseCounter(title)} />
-            <button type='button' >
+            <CoffeeCount count={coffeeCount} increaseCounter={increaseCounter} decreaseCounter={decreaseCounter} />
+            <button type='button' onClick={handleAdd}>
               <ShoppingCart size={22} weight="fill" />
             </button>
           </div>

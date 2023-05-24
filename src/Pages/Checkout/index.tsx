@@ -1,27 +1,33 @@
+import toast from 'react-hot-toast';
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 import { AddressForm } from './components/AddressForm'
-import styles from './styles.module.scss'
 import { CurrencyDollar, MapPinLine } from '@phosphor-icons/react';
 import { ButtonPaymentType } from './components/ButtonPaymentType';
 import { CoffeeCheckoutCard } from './components/CoffeeCheckoutCard';
-import { coffeesList } from '../../constants/coffeelist';
+import styles from './styles.module.scss'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCoffeeDelivery } from '../../contexts/CoffeeDelivery';
+import { formatCurrency } from '../../services/utils';
 
 const addressFormvalidations = zod.object({
-  cep: zod.string().trim().min(14, 'CEP inválido'),
-  rua: zod.string().trim().min(1, 'Rua obrigatória'),
-  numero: zod.string().min(1, 'Número obrigatório'),
+  cep: zod.string().trim().min(8, 'CEP Obrigatório'),
+  rua: zod.string().trim().min(1, 'Rua Obrigatória'),
+  numero: zod.string().min(1, 'Número Obrigatório'),
   complemento: zod.string(),
-  bairro: zod.string().trim().min(1, 'Bairro obrigatório'),
-  cidade: zod.string().trim().min(1, 'Cidade obrigatório'),
-  uf: zod.string().trim().min(2, 'UF obrigatório'),
-  paymentType: zod.string().trim().min(2, 'Forma de pagamento obrigatória'),
+  bairro: zod.string().trim().min(1, 'Bairro Obrigatório'),
+  cidade: zod.string().trim().min(1, 'Cidade Obrigatório'),
+  uf: zod.string().trim().min(2, 'UF Obrigatório'),
+  paymentType: zod.string().trim().min(2, 'Forma De Pagamento Obrigatória'),
 })
 
 type addressFormData = zod.infer<typeof addressFormvalidations>
 
 export function Checkout() {
+  const { coffees, cartCount, coffeeTotal, buyCoffee, } = useCoffeeDelivery();
+  const navigate = useNavigate();
   const addressForm = useForm<addressFormData>({
     resolver: zodResolver(addressFormvalidations),
     defaultValues: {
@@ -45,11 +51,39 @@ export function Checkout() {
 
 
   function confirmCheckout(data: addressFormData) {
-    console.log(data)
+    buyCoffee({
+      address: data.rua,
+      addressNumber: data.numero,
+      paymentType: data.paymentType,
+      city: data.cidade,
+      uf: data.uf,
+      district: data.bairro
+    })
+    navigate('/success')
   }
+
+  useEffect(() => {
+    if (!errors) return;
+
+    const errorsList = Object.values(errors)
+    if (!Array.isArray(errorsList)) return;
+    if (errorsList.length === 0) return;
+
+    const firstMessage = errorsList.find((error) => error?.message)
+    if (!firstMessage?.message) return;
+
+    toast.error(firstMessage.message)
+
+  }, [errors])
+
+
+  useEffect(() => {
+    if (cartCount > 0) return;
+    navigate('/')
+  }, [cartCount])
+
   return (
     <form className={styles.checkoutContainer} onSubmit={handleSubmit(confirmCheckout)}>
-
       <div className={styles.contentContainer}>
         <h3>Complete seu pedido</h3>
 
@@ -96,21 +130,23 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
         <div className={styles.totalContainer}>
           <div className={styles.coffeesList}>
-            <div>
-              <CoffeeCheckoutCard count={3} img={coffeesList[0].img} price={coffeesList[0].price} title={coffeesList[0].title} />
-              <hr />
-            </div>
-
-            <div>
-              <CoffeeCheckoutCard count={3} img={coffeesList[0].img} price={coffeesList[0].price} title={coffeesList[0].title} />
-              <hr />
-            </div>
+            {
+              coffees.map((coffee) => {
+                if (!coffee.count) return null
+                return (
+                  <div key={coffee.id}>
+                    <CoffeeCheckoutCard count={coffee.count} id={coffee.id} img={coffee.img} price={coffee.price} title={coffee.title} />
+                    <hr />
+                  </div>
+                )
+              })
+            }
           </div>
 
           <div className={styles.paymentTotalContainer}>
             <div>
               <p>Total de itens</p>
-              <span>R$ 29,70</span>
+              <span>{formatCurrency({ currency: true, value: coffeeTotal })}</span>
             </div>
 
             <div>
@@ -120,7 +156,7 @@ export function Checkout() {
 
             <div>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>{formatCurrency({ currency: true, value: coffeeTotal + 3.5 })}</strong>
             </div>
           </div>
 
